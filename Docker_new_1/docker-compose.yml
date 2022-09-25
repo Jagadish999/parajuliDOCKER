@@ -1,0 +1,36 @@
+#docker setup code from https://www.section.io/engineering-education/dockerized-php-apache-and-mysql-container-development-environment/
+version: '3.8'
+services:
+    php-apache-environment:
+        container_name: php-apache
+        build:
+            context: ./
+            dockerfile: DockerFile
+        depends_on:
+            - db
+        volumes:
+            - ./:/var/www/html/
+        ports:
+            - 8000:80
+    db:
+        container_name: db
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: assignment1
+            MYSQL_USER: user
+            MYSQL_PASSWORD: user
+        volumes:
+            - ./database.sql:/docker-entrypoint-initdb.d/0_init.sql
+        ports:
+            - "9906:3306"
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - '8080:80'
+        restart: always
+        environment:
+            PMA_HOST: db
+        depends_on:
+            - db

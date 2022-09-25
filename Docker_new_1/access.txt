@@ -1,0 +1,8 @@
+home page: http://localhost:8000/index.php?show=loginPage
+admin name: admin
+admin email: admin@gmail.com
+admin password: admin
+
+nonadminuser: dummy
+nonadminemail: dummy@gmail.com
+nonadminpassword: dummy
